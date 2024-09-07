@@ -1,0 +1,47 @@
+<%- include("./partials/header.ejs") %>
+<main class="main" id="find">
+  <!--searching the location-->
+  <div class="block block1">
+    <form action="/search" method="post" id="search">
+      <label for="search">Search City</label>
+      <input type="text" name="citySearch" placeholder="Enter your City" class="search" />
+      <input type="submit" value="Search" class="button-5" />
+    </form>
+  </div>
+  <!--results shown below as user press search button-->
+  <% if(locals.searchResult) {%>
+  <h2>Select your city below</h2>
+  <div class="block block2 headings">
+    <h3>Name</h3>
+    <h3>City</h3>
+    <h3>State</h3>
+    <h3>Latitude</h3>
+    <h3>Longitude</h3>
+    <h3>Select</h3>
+  </div>
+  <!-- result fetch form the api is received as the object-->
+  <% searchResult.forEach(element => { %>
+  <form method="post" action="/submitLocation">
+    <div class="block block3 results">
+      <p><%= element.country_code %>: <%= element.name %></p>
+      <p><%= element.admin2 %></p>
+      <p><%= element.admin1 %></p>
+      <p><%= element.latitude %></p>
+      <p><%= element.longitude %></p>
+      <!--selected data send back and store in location.json-->
+      <input type="hidden" name="name" value="<%= element.name %>" />
+      <input type="hidden" name="city" value="<%= element.admin2 %>" />
+      <input type="hidden" name="state" value="<%= element.admin1 %>" />
+      <input type="hidden" name="country" value="<%= element.country%>" />
+      <input type="hidden" name="latitude" value="<%= element.latitude %>" />
+      <input type="hidden" name="longitude" value="<%= element.longitude %>" />
+      <input type="hidden" name="timezone" value="<%= element.timezone %>" />
+      <input type="submit" value="Select" class="button-5" />
+    </div>
+  </form>
+  <!-- The message shows when the location is selected -->
+  <% }) %> <% } %> <% if (locals.message) { %>
+  <h2><%= message %></h2>
+  <% } %>
+</main>
+<%- include("./partials/footer.ejs") %>

@@ -1,0 +1,83 @@
+<%- include("./partials/header.ejs") %>
+<main class="container" id="today">
+  <div class="grid-block">
+    <div class="weather block1">
+      <% if(locals.currentData){ %>
+      <div class="heading">
+        <h2><%= country %>, <%= state %>, <%= city %> </h2>
+        <h2 style="text-align: right; text-transform: uppercase;"><%= is_day %></h2>
+      </div>
+      <div class="main-info">
+        <% const currentTime =currentData.current.time.slice(11)  %>
+
+        <p><%= currentData.current.time.slice(11) %></p>
+        <p class="temperature">
+          <%= currentData.current.temperature_2m %><sup style="font-size: 35px"><%= currentData.current_units.temperature_2m %></sup>
+        </p>
+        <p style="font-size: 20px;"><%= description %> Weather</p>
+      </div>
+      <div class="details">
+        <p>
+          Feels Like: <%= currentData.current.apparent_temperature %><sup>
+            <%= currentData.current_units.apparent_temperature %></sup>
+        </p>
+        <p>
+          Precipitation: <%= currentData.current.precipitation %> <%=currentData.current_units.precipitation %>
+        </p>
+        <p>
+          Humidity: <%= currentData.current.relative_humidity_2m %> <%=currentData.current_units.relative_humidity_2m %>
+        </p>
+        <p>
+          Wind: <%= currentData.current.wind_speed_10m %> <%=currentData.current_units.wind_speed_10m %>
+        </p>
+      </div>
+      <div class="header-icon">
+        <img src="<%= iconURL %>" alt="weather icon" />
+        <p>Cloud Cover: <%= currentData.current.cloud_cover %> <%= currentData.current_units.cloud_cover %> </p>
+      </div>
+      <% } %>
+    </div>
+    <h2 style="text-align: center; margin: 0;">UpComming Hours</h2>
+    <div class="weather block3">
+      <table>
+        <tr class="hourly">
+          <th>Time</th>
+          <th>Temperature</th>
+          <th>Feels like</th>
+          <th>Description</th>
+          <th>Prescription</th>
+          <th>Wind Speed</th>
+          <th colspan="2">Cloud cover</th>
+        </tr>
+        <!-- loop thought the currentData.hourly array and view data in form of table-->
+        <% for(var i = Number(currentData.current.time.slice(11, 13)) + 1 ; i <= 24 ; i++){%>
+        <% const data = icons(currentData.hourly.weather_code[i],Number(currentData.hourly.time[i].slice(11, 13)) + 1,weatherInfo) %>
+        <tr class="hourly">
+          <td><%= currentData.hourly.time[i].slice(11) %> </td>
+          <td><%= currentData.hourly.temperature_2m[i] %> <%= currentData.hourly_units.temperature_2m[0] %></td>
+          <td><%= currentData.hourly.apparent_temperature[i] %> <%= currentData.hourly_units.apparent_temperature[0] %></td>
+          <td><%= data.description %></td>
+          <td><%= currentData.hourly.relative_humidity_2m[i] %> <%= currentData.hourly_units.relative_humidity_2m[0] %></td>
+          <td><%= currentData.hourly.wind_speed_10m[i] %> Km/h</td>
+          <td><%=  currentData.hourly.cloud_cover[i] %> <%=  currentData.hourly_units.cloud_cover[0] %></td>
+          <td><img src="<%= data.image %>" alt="icon"></td>
+        </tr>
+        <% } %>
+      </table>
+    </div>
+  </div>
+  <div height="100"></div>
+</main>
+<%- include("./partials/footer.ejs") %>
+<!-- Function is used to fetch description and icon based on weather code -->
+<% function icons(weather_code, currentHour, object) {
+  var is_day ;
+  var w_code = weather_code.toString();
+  if (currentHour > 7 && currentHour < 18) {
+     is_day = "day";
+  } else {
+     is_day = "night";
+  }
+  console.log(is_day);
+  return object[w_code][is_day];
+} %>

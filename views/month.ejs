@@ -1,0 +1,88 @@
+<%- include("./partials/header.ejs") %>
+<main class="container" id="month">
+  <div class="grid-block">
+    <div class="weather header">
+      <div class="item">
+        <p>Date</p>
+      </div>
+      <div class="item">
+        <p>Temperature</p>
+      </div>
+      <div class="item">
+        <p>Feels Like</p>
+      </div>
+      <div class="item">
+        <p>UV index</p>
+      </div>
+      <div class="item">
+        <p>Prescription</p>
+      </div>
+      <div class="item">
+        <p>Wind speed</p>
+      </div>
+      <div class="item">
+        <p>Condition</p>
+      </div>
+      <div class="item">
+        <p>Description</p>
+      </div>
+    </div>
+    <% for(var i = 1 ; i < currentData.daily.time.length ; i++) { %>
+    <% const data = icons(currentData.daily.weather_code[i],weatherInfo) %>
+    <div class="weather">
+      <div class="item">
+        <p><%= currentData.daily.time[i]%></p>
+      </div>
+      <div class="item">
+        <p>
+          <span>Min: </span>
+          <%= currentData.daily.temperature_2m_min[i] %>
+          <%=currentData.daily_units.temperature_2m_min %>
+        </p>
+        <p>
+          <span>Max: </span>
+          <%= currentData.daily.temperature_2m_max[i] %><%=currentData.daily_units.temperature_2m_max %>
+        </p>
+      </div>
+      <div class="item">
+        <p>
+          <span>Min: </span>
+          <%= currentData.daily.apparent_temperature_min[i] %>
+          <%=currentData.daily_units.apparent_temperature_min %>
+        </p>
+        <p>
+          <span>Max: </span>
+          <%= currentData.daily.apparent_temperature_max[i] %>
+          <%=currentData.daily_units.apparent_temperature_max %>
+        </p>
+      </div>
+      <div class="item uv_index">
+        <p>
+          <%= currentData.daily.uv_index_max[i] %>
+          <%=currentData.daily_units.uv_index_max %>
+        </p>
+      </div>
+      <div class="item">
+        <p>
+          <%= currentData.daily.precipitation_probability_max[i] %>
+          <%=currentData.daily_units.precipitation_probability_max %>
+        </p>
+      </div>
+      <div class="item">
+        <p><%= currentData.daily.wind_speed_10m_max[i] %> Km/h</p>
+      </div>
+      <div class="item">
+        <p><%= data.description %></p>
+      </div>
+      <div class="item">
+        <img src="<%= data.image %>" alt="icon" />
+      </div>
+    </div>
+    <% } %>
+  </div>
+</main>
+<%- include("./partials/footer.ejs") %>
+<% function icons(weather_code, object){ 
+  var w_code = weather_code.toString(); 
+  return object[w_code]["day"]; 
+  } %>

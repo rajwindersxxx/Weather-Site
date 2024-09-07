@@ -1,0 +1,48 @@
+<%- include("./partials/header.ejs") %>
+<main class="container" id="hour">
+  <div class="grid-block">
+    <div class="weather block3">
+      <table>
+        <tr class="hourly">
+          <th>Date</th>
+          <th>Time</th>
+          <th>Temperature</th>
+          <th>Feels like</th>
+          <th>Description</th>
+          <th>Prescription</th>
+          <th>Wind Speed</th>
+          <th colspan="2">Cloud cover</th>
+        </tr>
+        <!-- the data is loop through (currentData.hourly )the array and view hourly data information in form of table-->
+        <% const arrayLength = Number(currentData.current.time.length) - 1%>
+        <%console.log(arrayLength); %>
+        <% for(var i = Number(currentData.current.time.slice(11, 13)) + 1 ; i <= 175 ; i++){%>
+        <% const data = icons(currentData.hourly.weather_code[i],Number(currentData.hourly.time[i].slice(11, 13)) + 1,weatherInfo) %>
+        <tr class="hourly">
+          <td><%= currentData.hourly.time[i].slice(0,10) %></td>
+          <td><%= currentData.hourly.time[i].slice(11) %> </td>
+          <td><%= currentData.hourly.temperature_2m[i] %> <%= currentData.hourly_units.temperature_2m[0] %></td>
+          <td><%= currentData.hourly.apparent_temperature[i] %> <%= currentData.hourly_units.apparent_temperature[0] %></td>
+          <td><%= data.description %></td>
+          <td><%= currentData.hourly.relative_humidity_2m[i] %> <%= currentData.hourly_units.relative_humidity_2m[0] %></td>
+          <td><%= currentData.hourly.wind_speed_10m[i] %> Km/h</td>
+          <td><%=  currentData.hourly.cloud_cover[i] %> <%=  currentData.hourly_units.cloud_cover[0] %></td>
+          <td><img src="<%= data.image %>" alt="icon"></td>
+        </tr>
+        <% } %>
+      </table>
+    </div>
+  </div>
+</main>
+<%- include("./partials/footer.ejs") %>
+<!-- function used for fetch description and icon using weather_code-->
+<% function icons(weather_code, currentHour, object) {
+  var is_day ;
+  var w_code = weather_code.toString();
+  if (currentHour > 7 && currentHour < 18) {
+     is_day = "day";
+  } else {
+     is_day = "night";
+  }
+  return object[w_code][is_day];
+} %>

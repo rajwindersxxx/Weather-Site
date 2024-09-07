@@ -1,0 +1,289 @@
+
+
+.weather {
+  background-color: var(--foreground-color);
+  border-radius: .9375rem;
+  padding: 1.25rem;
+}
+
+/* Style for find.ejs main container */
+#find .block {
+  background-color: var(--foreground-color);
+  border-radius: .9375rem;
+  padding: 0 1.25rem;
+  margin: .625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#find .block1 {
+  min-height: 6.25rem;
+}
+#find .block3 {
+  height: 4.6875rem;
+}
+#find .block2 h3 {
+  margin: .625rem;
+}
+
+#find #search {
+  display: flex;
+  gap: 1.5625rem;
+}
+#find #search label,
+#find #search input {
+  font-size: 1.25rem;
+  border-radius: .625rem;
+  padding: .3125rem;
+}
+#find #search .search {
+  width: 21.875rem;
+}
+#find #search label {
+  font-size: 1.875rem;
+}
+#find .results,
+#find .headings {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+#find .block h3,
+#find .block p {
+  text-align: left;
+  max-width: 8.125rem;
+}
+#find .results:hover {
+  box-shadow: 0 4px 1.2px var(--background-color);
+  color: var(--background-color);
+  cursor: pointer;
+}
+#find h2 {
+  margin: .3125rem;
+  text-align: center;
+}
+/* Style for hour.ejs main container */
+
+#hour .weather {
+  background-color: var(--foreground-color);
+  border-radius: .9375rem;
+  padding: 1.25rem;
+}
+#hour .grid-block {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  gap: 1.25rem;
+}
+
+#hour .heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#hour .temperature {
+  font-size: 3.75rem;
+  margin: 0;
+}
+
+#hour .header-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+#hour .header-icon img {
+  max-height: 7.5rem;
+  max-width: 7.5rem;
+}
+#hour table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  margin: auto;
+}
+
+#hour table td,
+#hour table th {
+  border-bottom: .0625rem solid var(--border-color);
+  padding: .5rem;
+  text-align: center;
+}
+#hour table th {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  text-align: center;
+}
+#hour table td img {
+  height: 3.125rem;
+}
+/* Style for month.ejs main container */
+#month {
+  max-width: 75rem;
+}
+#month .grid-block {
+  display: grid;
+  grid-template-rows: auto;
+  gap: .625rem;
+}
+#month .weather {
+  background-color: var(--foreground-color);
+  /* border-radius: .9375rem; */
+
+  display: flex;
+  flex-direction: row;
+  gap: .625rem;
+  flex-basis: 1 1 0;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: .0625rem solid var(--border-color);
+  padding: 0;
+}
+
+#month .weather p,
+#month .temperature {
+  font-size: .9375rem;
+  text-align: center;
+}
+#month .header p {
+  font-size: 1.4375rem;
+}
+#month .header {
+  border: .0625rem solid var(--border-color);
+}
+#month .item {
+  flex: 1 1 0;
+  max-width: 7.5rem;
+}
+
+/* Style for today.ejs main container */
+
+#today .grid-block {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto 1.875rem auto;
+
+  gap: 1.25rem;
+}
+
+#today .block2 {
+  grid-row: span 2;
+}
+
+#today .heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#today .temperature {
+  font-size: 3.75rem;
+  margin: 0;
+}
+
+#today .block1 {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: 3.125rem auto;
+  gap: .625rem;
+}
+
+#today .block1 div:nth-child(1) {
+  grid-column: span 3;
+  border-bottom: .0625rem solid var(--text-color1);
+}
+
+#today .block1 div:nth-child(5) {
+  grid-column: span 3;
+}
+
+#today .block1 div:nth-child(2),
+#today .block1 div:nth-child(3) {
+  border-right: .0625rem solid var(--text-color1);
+}
+
+#today .header-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#today .header-icon img {
+  max-height: 7.5rem;
+  max-width: 7.5rem;
+}
+
+#today table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+}
+
+#today table td,
+#today table th {
+  border-bottom: .0625rem solid var(--border-color);
+  padding: .5rem;
+  text-align: center;
+}
+
+#today table th {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  text-align: center;
+}
+
+#today table td img {
+  height: 3.125rem;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.main-info{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+@media screen and (max-width: 48rem) {
+  #month .item:nth-child(4),
+  .weather .item:nth-child(4) {
+    display: none;
+  }
+  #month .weather p,
+  #month .temperature {
+    font-size: .75rem;
+    text-align: center;
+  }
+  #month .header p {
+    font-size: 1rem;
+  }
+  #find .block p,
+  #find .block h3 {
+    flex: 1 1 0;
+    max-width: 5rem;
+  }
+}
+@media screen and (max-width: 26.5625rem) {
+  #find #search {
+    flex-direction: column;
+    align-items: center;
+    gap: .9375rem;
+    padding: .625rem;
+  }
+  #find #search .search {
+    width: 18.75rem;
+  }
+  #find .block {
+    padding: 0;
+  }
+  #find form .block p:nth-child(4),
+  #find form .block p:nth-child(5),
+  #find .block h3:nth-child(4),
+  #find .block h3:nth-child(5) {
+    display: none;
+  }
+  #find {
+    padding: 0;
+  }
+}
